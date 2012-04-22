@@ -55,6 +55,7 @@ public class PollService extends IntentService {
 	 */
 	@Override
 	protected void onHandleIntent(Intent intent) {
+		Log.i(Constants.TAG, "About to start polling loop.");
 		while (true) {
 			if (Constants.GET_COMMAND) {
 			    // Read one command from the server.
@@ -109,7 +110,8 @@ public class PollService extends IntentService {
 		// @ToDo: Fetch multiple commands at once, up to a limit.
         Log.i(Constants.TAG, "Requesting command from server.");
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpGet httpget = new HttpGet("http://108.229.97.42:8989?request_source=CAR");
+		//HttpGet httpget = new HttpGet("http://demo.eden.sahanafoundation.org/eden/supply/item/10");
+		HttpGet httpget = new HttpGet("http://108.229.97.42:8990/new.html");
     	HttpResponse response = null;
 		try {
 			response = httpclient.execute(httpget);
@@ -200,7 +202,7 @@ public class PollService extends IntentService {
         // Create a new HttpClient and Post Header
         HttpClient httpclient = new DefaultHttpClient();
         // @ToDo: Change server.
-        HttpPost httppost = new HttpPost("http://108.229.97.42:8989");
+        HttpPost httppost = new HttpPost("http://108.229.97.42:8990");
         for (File file : files) {
         	try {
         		BufferedInputStream fstream = new BufferedInputStream(new FileInputStream(file));
